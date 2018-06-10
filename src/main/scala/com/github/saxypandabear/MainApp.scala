@@ -1,14 +1,16 @@
 package com.github.saxypandabear
 
 import akka.actor.{ActorSystem, Props}
-import com.github.saxypandabear.ActorMessage.WhoToGreet
+import com.github.saxypandabear.MusicPlayer.StartMusic
 
-class MainApp extends App {
+object MainApp extends App {
   override def main(args: Array[String]): Unit = {
-    val system = ActorSystem("Hello-App")
-    val greeter = system.actorOf(Props[Greeter], "greeter")
+    val system = ActorSystem("Main")
 
-    // send message to greeter
-    greeter ! WhoToGreet("me")
+    val musicPlayer = system.actorOf(Props[MusicPlayer], "player")
+
+    musicPlayer ! StartMusic
+
+    system.terminate()
   }
 }
