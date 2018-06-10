@@ -4,9 +4,11 @@ import akka.actor.{ActorSystem, Props}
 import com.github.saxypandabear.ActorMessage.WhoToGreet
 
 object HelloApp extends App {
-  val system = ActorSystem("Hello-App")
-  val greeter = system.actorOf(Props[Greeter], "greeter")
+  override def main(args: Array[String]): Unit = {
+    val system = ActorSystem("Hello-App")
+    val greeter = system.actorOf(Props[Greeter], "greeter")
 
-  // send message to greeter
-  greeter ! WhoToGreet("me")
+    // send message to greeter
+    greeter ! WhoToGreet("me")
+  }
 }
